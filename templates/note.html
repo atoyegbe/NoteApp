@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+ <div class="center">
+     {{ note | safe }}
+
+     <a href="{% url 'edit_note' note.id %}">Edit</a>
+     <a href="{% url 'delete' note.id %}">Delete</a>
+ </div>
+
+
+{% endblock %}

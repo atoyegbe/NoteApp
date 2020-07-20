@@ -1,0 +1,13 @@
+
+
+{% block content %}
+<div class="remove">
+    <form action="" method="POST">
+        {% csrf_token %}
+        <input type="submit" value="Delete">
+        <a href="/note/{{ note.id }}/">Cancel </a>
+    </form>
+</div>
+
+
+{% endblock %}

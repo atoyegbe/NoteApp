@@ -1,7 +1,19 @@
+
 {% extends 'base.html' %}
 
 {% block content %}
 
 <h1>Write down your thoughts </h1>
+
+{% if notes %}
+  {% for note in notes %}
+  <div class="note">
+    {{note|safe|truncatewords:10}} <a href="{%  url 'note' note.id %}">Read more..</a>
+  </div>
+  {% endfor %}
+{% else %}
+  <h4> You don't have any notes available </h4>
+{% endif  %}
+
 
 {% endblock %}
