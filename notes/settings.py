@@ -25,14 +25,13 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env('SECRET_KEY')
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 DEBUG = env('DEBUG')
 
 
-ALLOWED_HOSTS = ['notethoughts.herokuapp.com',  '127.0.0.1', 'localhost',]
+ALLOWED_HOSTS = ['notethoughts.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
@@ -122,9 +121,8 @@ AUTHENTICATION_BACKENDS = (
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
-DATABASES = {
-   'default': env.db(),
-}
+DATABASES = {'default': env.db('DATABASE_URL')}
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
