@@ -184,3 +184,4 @@ CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
 
 django_heroku.settings(locals())
+del DATABASES['default']['OPTIONS']['sslmode']
