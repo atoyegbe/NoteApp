@@ -9,8 +9,8 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
 import os
+import django_heroku
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'mlc&k%_pv#ds8)chbq@tbzt+c+mo+!-$r^wf9#839@45n-1f23'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -174,10 +174,21 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
-# CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor/"
-# CKEDITOR_CONFIGS = {
-#     'default': {
-#         'toolbar': 'basic',
 
-#     },
-# }
+import environ
+
+
+
+env = environ.Env(
+    # set casting, default value
+    DEBUG=(bool, False)
+)
+# reading .env file
+environ.Env.read_env()
+
+# False if not in os.environ
+DEBUG = env('DEBUG')
+
+SECRET_KEY = env('SECRET_KEY')
+
+django_heroku.settings(locals())
