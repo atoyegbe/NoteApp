@@ -23,7 +23,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 SECRET_KEY="w1b+_$v0c!8w@=6@g%l&&a(y-^16$41ktzc9)tx)#&v*iloz$b"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = ['notethoughts.herokuapp.com',  '127.0.0.1', 'localhost',]
 
