@@ -2,17 +2,15 @@ from django.shortcuts import render, redirect
 from .models import Note
 from .forms import NoteForm
 from django.utils.timezone import datetime
-from allauth.account.decorators import verified_email_required
+from allauth.account.decorators import verified_email_required #similar to @login_required
 # Create your views here.
 
 def home(request):
     notes = Note.objects.all()
-    
     return render(request, 'home.html', context={'notes': notes})
 
 @verified_email_required
 def addNote(request):
-    
     note = NoteForm()
     
     if request.method == 'POST':
@@ -29,14 +27,10 @@ def noteDetails(request, pk):
     note = Note.objects.get(id=pk)
     return render(request, 'note.html', context={'note':note})
 
-
-
 def editNote(request, pk):
-    
     note = Note.objects.get(id=pk)
     
     if request.method == 'POST':
-        
         form = NoteForm(request.POST, instance=note)
         
         if form.is_valid():
@@ -51,7 +45,6 @@ def editNote(request, pk):
     return render(request, 'edit.html', context={'form': form})
 
 def deleteNote(request, pk):
-    
     note = Note.objects.filter(id=pk)
     
     if request.method == 'POST':

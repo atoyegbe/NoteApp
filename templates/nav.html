@@ -1,24 +1,29 @@
+
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark sticky-top">
+
     <a class="navbar-brand" href="{% url 'home' %}">Notes</a>
+
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
+
     <div class="collapse navbar-collapse" id="navbarText">
       <ul class="navbar-nav mr-auto">
        
         {% if user.is_authenticated %}
-        <li class="nav-item">
-          <a class="nav-link" href="/add_note">Add Note</a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" href="accounts/logout">Log out</a>
+          <li class="nav-item">
+            <a class="nav-link" href="/add_note">Add Note</a>
           </li>
+          <li class="nav-item">
+              <a class="nav-link" href="accounts/logout">Log out</a>
+            </li>
         {% endif %}
       </ul>
+
       {% if user.is_authenticated %}
-      <span class="navbar-text">
-            Welcome {{user}}
-      </span>
+        <span class="navbar-text">
+              Hii {{user}}
+        </span>
       {% endif %}
 
     </div>
