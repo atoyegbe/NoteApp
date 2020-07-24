@@ -50,6 +50,13 @@ INSTALLED_APPS = [
 
 
 SITE_ID=1
+
+ACCOUNT_EMAIL_REQUIRED = True
+ACCOUNT_USERNAME_REQUIRED = False
+ACCOUNT_SIGNUP_PASSWORD_ENTER_TWICE = False
+ACCOUNT_SESSION_REMEMBER = True
+ACCOUNT_AUTHENTICATION_METHOD = 'email'
+ACCOUNT_UNIQUE_EMAIL = True
 # Provider specific settings
 SOCIALACCOUNT_PROVIDERS = {
    'google': {
@@ -168,9 +175,9 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 # CKEDITOR_BASEPATH = "/my_static/ckeditor/ckeditor/"
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'basic',
+# CKEDITOR_CONFIGS = {
+#     'default': {
+#         'toolbar': 'basic',
 
-    },
-}
+#     },
+# }

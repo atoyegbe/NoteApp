@@ -2,18 +2,51 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
-<h1>Write down your thoughts </h1>
-
-{% if notes %}
-  {% for note in notes %}
-  <div class="note">
-    {{note|safe|truncatewords:10}} <a href="{%  url 'note' note.id %}">Read more..</a>
-  </div>
-  {% endfor %}
+{% if user.is_authenticated %}
+  {% if notes %}
+  <h1 class="text-center"> My Notes </h1>
+  <hr>
+  <div class="row">
+    {% for note in notes %}
+    <div class="col-sm-6">
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">{{ note.title }}</h5>
+          <p class="card-text">{{note|safe|truncatewords:15}} </p>
+          <a href="{%  url 'note' note.id %}" class="btn btn-dark">Read</a>
+        </div>
+      </div>
+    </div>
+    {% endfor %}
+  </div> 
+  {% else %}
+  <h1 class="text-center">Write down your thoughts </h1>
+  <hr>
+    <h4> You don't have any notes available </h4>
+  {% endif  %}
 {% else %}
-  <h4> You don't have any notes available </h4>
-{% endif  %}
+<hr>
+<div class="container ">
+  <div class="row">
+    
+ <h4>   A simple Note web app.</h4>
+
+  </div>
+  <hr>
+  <div class="row">
+    <div class="col">
+    <a href="{% url 'account_login' %}" class="btn btn-primary">Log In</a>
+      
+    </div> 
+     <div class="col">
+      <a href="{% url 'account_signup' %}" class="btn btn-success"> Sign Up</a>
+    </div>
+    
+  </div>
+
+</div>
+
+{% endif %}
 
 
 {% endblock %}

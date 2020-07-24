@@ -1,14 +1,19 @@
 {% extends 'base.html' %}
 
-
 {% block content %}
 
- <div class="center">
-     {{ note | safe }}
+<hr>
+    <div class="row note-border justify-content-center">
+        <div class="w-50">
+            {{ note | safe }}
+            <span class="text-muted">Last updated {{ note.date_created  }}</span>
 
-     <a href="{% url 'edit_note' note.id %}">Edit</a>
-     <a href="{% url 'delete' note.id %}">Delete</a>
- </div>
-
-
+            <button class="btn btn-info">
+                <a href="{% url 'edit_note' note.id %} " class="text-white">Edit</a>
+            </button>
+            <button class="btn btn-danger ">
+            <a href="{% url 'delete' note.id %}" class="text-white">Delete</a>
+            </button>
+        </div>
+    </div>
 {% endblock %}

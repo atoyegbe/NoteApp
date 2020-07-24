@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect
 from .models import Note
 from .forms import NoteForm
 from django.utils.timezone import datetime
+from allauth.account.decorators import verified_email_required
 # Create your views here.
 
 def home(request):
@@ -9,7 +10,7 @@ def home(request):
     
     return render(request, 'home.html', context={'notes': notes})
 
-
+@verified_email_required
 def addNote(request):
     
     note = NoteForm()
