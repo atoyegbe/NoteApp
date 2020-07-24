@@ -11,6 +11,11 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 import os
 import django_heroku
+import environ
+
+env = environ.Env( DEBUG=(bool, False))
+    
+environ.Env.read_env()
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -20,10 +25,12 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = env('SECRET_KEY')
 
-SECRET_KEY="w1b+_$v0c!8w@=6@g%l&&a(y-^16$41ktzc9)tx)#&v*iloz$b"
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+DEBUG = env('DEBUG')
+
 
 ALLOWED_HOSTS = ['notethoughts.herokuapp.com',  '127.0.0.1', 'localhost',]
 
@@ -116,16 +123,8 @@ AUTHENTICATION_BACKENDS = (
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
 DATABASES = {
-   'default': {
-       'ENGINE': 'django.db.backends.postgresql_psycopg2',
-       'HOST': 'localhost',
-       'NAME': 'noteapp',
-       'USER': 'adeyemi',
-       'PASSWORD': 'atoyegbe45',
-       'PORT': '5432',
-   }
+   'default': env.db()
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
@@ -185,20 +184,5 @@ CKEDITOR_UPLOAD_PATH = 'uploads/'
 CKEDITOR_IMAGE_BACKEND = "pillow"
 CKEDITOR_ALLOW_NONIMAGE_FILES = False
 
-import environ
-
-
-
-env = environ.Env(
-    # set casting, default value
-    DEBUG=(bool, False)
-)
-# reading .env file
-environ.Env.read_env()
-
-# False if not in os.environ
-DEBUG = env('DEBUG')
-
-SECRET_KEY = env('SECRET_KEY')
 
 django_heroku.settings(locals())
