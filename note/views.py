@@ -9,7 +9,6 @@ def home(request):
     notes = Note.objects.all()
     return render(request, 'home.html', context={'notes': notes})
 
-@verified_email_required
 def addNote(request):
     note = NoteForm()
     
