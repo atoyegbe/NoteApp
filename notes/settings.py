@@ -24,7 +24,7 @@ SECRET_KEY = env.str('SECRET_KEY')
 DEBUG = env('DEBUG')
 
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['notethoughts.herokuapp.com', '127.0.0.1', 'localhost']
 
 
 # Application definition
