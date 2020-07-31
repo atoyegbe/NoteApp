@@ -111,6 +111,9 @@ AUTHENTICATION_BACKENDS = (
     'allauth.account.auth_backends.AuthenticationBackend',
 )
 
+ACCOUNT_EMAIL_VERIFICATION = 'none'
+ACCOUNT_AUTHENTICATED_LOGIN_REDIRECTS = False
+
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
