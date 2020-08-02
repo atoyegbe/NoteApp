@@ -12,5 +12,5 @@ class Note(models.Model):
         verbose_name_plural = 'notes'
     
     def __str__(self):
-        return self.text
+        return self.title
     
