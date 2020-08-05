@@ -76,6 +76,5 @@ class TestViews(TestCase):
         response = self.client.post(url, data=data)
         
         self.assertEquals(response.status_code, 302)
-        # self.assertEquals(self.note_one, '')
         
         
