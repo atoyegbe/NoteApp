@@ -16,7 +16,10 @@ class TestViews(TestCase):
             title='first title',
             text='My first view test',
         )
-        
+        self.note_two = Note.objects.create(
+            title='second note',
+            text='SUsing django built in unitest for testing my django project',
+        )
     
     def test_note_home_GET(self):
         response = self.client.get(self.home_url)
@@ -24,19 +27,19 @@ class TestViews(TestCase):
         self.assertEquals(response.status_code, 200)
         self.assertTemplateUsed(response, 'home.html')
     
-    # def test_note_details_GET(self):
-    #     """Retrieve Note """
-    #     note_dix = Note.objects.create(
-    #         title='first title',
-    #         text='My first view test',
-    #     )
-    #     url = reverse('note', kwargs={'pk': 1})
+    def test_note_details_GET(self):
+        """Retrieve Note """
+        note_dix = Note.objects.create(
+            title='first title',
+            text='My first view test',
+        )
+        url = reverse('note', kwargs={'pk': self.note_one.pk})
         
-    #     data = model_to_dict(note_dix)
-    #     response = self.client.get(url)
+        data = model_to_dict(note_dix)
+        response = self.client.get(url)
         
-    #     self.assertEquals(response.status_code, 200)
-    #     self.assertTemplateUsed(response, 'note.html')
+        self.assertEquals(response.status_code, 200)
+        self.assertTemplateUsed(response, 'note.html')
         
    
     def test_note_details_POST(self):
@@ -57,7 +60,7 @@ class TestViews(TestCase):
             'text':'My first view test update',
          }
          
-         url = reverse('edit_note', kwargs={'pk': 4})
+         url = reverse('edit_note', kwargs={'pk': self.note_one.pk})
          add_form = NoteForm(data= form_data, instance= self.note_one)
          add_form.save()
          response = self.client.post(url, form_data)
@@ -65,4 +68,14 @@ class TestViews(TestCase):
          self.assertEquals(self.note_one.text, 'My first view test update')
         
     
+    def test_delte_note_details_POST(self):
+        """ Delete Note Test  """
+        
+        url = reverse('delete', kwargs={'pk': self.note_two.pk})
+        data = model_to_dict(self.note_two)
+        response = self.client.post(url, data=data)
+        
+        self.assertEquals(response.status_code, 302)
+        # self.assertEquals(self.note_one, '')
+        
         
